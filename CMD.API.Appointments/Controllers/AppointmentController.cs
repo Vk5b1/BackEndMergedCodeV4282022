@@ -21,7 +21,7 @@ namespace CMD.API.Appointments.Controllers
         // GET: api/Appointment/{doctorId}
         public IHttpActionResult GetAllAppointment(int doctorId)
         {
-            AppointmentBasicInfoDTO appointment = appointmentManager.GetAllAppointment(doctorId);
+            ICollection<AppointmentBasicInfoDTO> appointment = appointmentManager.GetAllAppointment(doctorId);
             return Ok(appointment);
         }
 

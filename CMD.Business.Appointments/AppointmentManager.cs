@@ -25,7 +25,22 @@ namespace CMD.Business.Appointments
 
         ICollection<AppointmentBasicInfoDTO> IAppointmentManager.GetAllAppointment(int doctorId)
         {
-            throw new NotImplementedException();
+            ICollection<Appointment> appointments = repo.GetAllAppointment(doctorId);
+            ICollection<AppointmentBasicInfoDTO> result = new List<AppointmentBasicInfoDTO>();
+            foreach (var appointment in appointments)
+            {
+                result.Add(new AppointmentBasicInfoDTO()
+                {
+                    AppointmentId = appointment.Id,
+                    AppointmentDate = appointment.AppointmentDate,
+                    AppointmentTime = appointment.AppointmentTime,
+                    PatientName = appointment.PatientDetail.Patient.FirstName + " " + appointment.PatientDetail.Patient.LastName,
+                    PatientPicture = appointment.PatientDetail.Patient.PatientPicture,
+                    PatientDOB = appointment.PatientDetail.Patient.DOB,
+                    Issue = appointment.Issue.Name
+                });
+            }
+            return result;
         }
     }
 }
