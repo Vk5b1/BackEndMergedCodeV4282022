@@ -12,7 +12,7 @@ namespace CMD.DTO.Appointments
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
         public string AppointmentStatus { get; set; }
-        public IssueDTO Issue { get; set; }
+        public string Issue { get; set; }
         public string Reason { get; set; }
         public PatientDTO Patient { get; set; }
         public DoctorDTO Doctor { get; set; }

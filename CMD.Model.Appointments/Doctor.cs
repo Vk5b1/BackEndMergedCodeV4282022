@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace CMD.Model.Appointments.Entities
+namespace CMD.Model.Appointments
 {
     public class Doctor
     {
@@ -12,6 +13,7 @@ namespace CMD.Model.Appointments.Entities
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime DOB { get; set; }
         public string DoctorPicture { get; set; }
         public int NPINumber { get; set; }
         public string PracticeLocation { get; set; }

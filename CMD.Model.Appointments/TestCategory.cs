@@ -1,4 +1,4 @@
-﻿namespace CMD.Model.Appointments.Entities
+﻿namespace CMD.Model.Appointments
 {
     public class TestCategory
     {

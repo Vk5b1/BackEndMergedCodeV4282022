@@ -47,31 +47,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Allergy.cs" />
-    <Compile Include="Entities\Appointment.cs" />
-    <Compile Include="Entities\AppointmentStatus.cs" />
-    <Compile Include="Entities\BloodGroup.cs" />
-    <Compile Include="Entities\ContactDetail.cs" />
-    <Compile Include="Entities\Doctor.cs" />
-    <Compile Include="Entities\DoctorAvailabilitySlot.cs" />
-    <Compile Include="Entities\FeedBack.cs" />
-    <Compile Include="Entities\Gender.cs" />
-    <Compile Include="Entities\Intake.cs" />
-    <Compile Include="Entities\Issue.cs" />
-    <Compile Include="Entities\MedicalProblem.cs" />
-    <Compile Include="Entities\Medicine.cs" />
-    <Compile Include="Entities\Patient.cs" />
-    <Compile Include="Entities\PatientDetail.cs" />
-    <Compile Include="Entities\Prescription.cs" />
+    <Compile Include="Allergy.cs" />
+    <Compile Include="Appointment.cs" />
+    <Compile Include="AppointmentStatus.cs" />
+    <Compile Include="BloodGroup.cs" />
+    <Compile Include="ContactDetail.cs" />
+    <Compile Include="Doctor.cs" />
+    <Compile Include="DoctorAvailabilitySlot.cs" />
+    <Compile Include="FeedBack.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="Intake.cs" />
+    <Compile Include="Issue.cs" />
+    <Compile Include="MedicalProblem.cs" />
+    <Compile Include="Medicine.cs" />
+    <Compile Include="Patient.cs" />
+    <Compile Include="PatientDetail.cs" />
+    <Compile Include="Prescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Question.cs" />
-    <Compile Include="Entities\QuestionRating.cs" />
-    <Compile Include="Entities\Speciality.cs" />
-    <Compile Include="Entities\Test.cs" />
-    <Compile Include="Entities\TestCategory.cs" />
-    <Compile Include="Entities\TestReport.cs" />
-    <Compile Include="Entities\Vital.cs" />
-    <Compile Include="Entities\VitalReading.cs" />
+    <Compile Include="Question.cs" />
+    <Compile Include="QuestionRating.cs" />
+    <Compile Include="Recommedation.cs" />
+    <Compile Include="Speciality.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="TestCategory.cs" />
+    <Compile Include="TestReport.cs" />
+    <Compile Include="Vital.cs" />
+    <Compile Include="VitalReading.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

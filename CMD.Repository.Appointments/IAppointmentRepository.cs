@@ -1,4 +1,4 @@
-﻿using CMD.Model.Appointments.Entities;
+﻿using CMD.Model.Appointments;
 using System.Collections.Generic;
 
 namespace CMD.Repository.Appointments
@@ -7,5 +7,7 @@ namespace CMD.Repository.Appointments
     {
         ICollection<Appointment> GetAllAppointment(int doctorId);
         Appointment CreateAppointment(Appointment appointment);
+        ICollection<Issue> GetIssues();
+        ICollection<Patient> GetRecommededPatients(int doctorId);
     }
 }

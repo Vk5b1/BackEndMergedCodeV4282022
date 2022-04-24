@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CMD.Model.Appointments.Entities
+namespace CMD.Model.Appointments
 {
     public class Patient
     {

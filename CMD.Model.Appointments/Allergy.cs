@@ -1,6 +1,6 @@
-﻿namespace CMD.Model.Appointments.Entities
+﻿namespace CMD.Model.Appointments
 {
-    public class Issue
+    public class Allergy
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -7,5 +7,7 @@ namespace CMD.Business.Appointments
     {
         ICollection<AppointmentBasicInfoDTO> GetAllAppointment(int doctorId);
         AppointmentFormDTO AddAppointment(AppointmentFormDTO appointmentForm);
+        ICollection<PatientDTOForPatientSearch> GetRecommendedPatients(int doctorId);
+        ICollection<IssueDTO> GetIssues();
     }
 }

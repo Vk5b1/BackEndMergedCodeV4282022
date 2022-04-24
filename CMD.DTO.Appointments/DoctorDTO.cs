@@ -11,6 +11,7 @@ namespace CMD.DTO.Appointments
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DOB { get; set; }
+        public string DoctorPicture { get; set; }
         public ICollection<string> Specialities { get; set; }
     }
 }

@@ -1,7 +1,5 @@
-using CMD.Model.Appointments.Entities;
-using System;
+using CMD.Model.Appointments;
 using System.Data.Entity;
-using System.Linq;
 
 namespace CMD.Repository.Appointments
 {
@@ -22,6 +20,9 @@ namespace CMD.Repository.Appointments
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         public virtual DbSet<Appointment> Appointments { get; set; }
+        public virtual DbSet<Doctor> Doctors { get; set; }
+        public virtual DbSet<Issue> Issues { get; set; }
+        public virtual DbSet<Recommedation> Recommedations { get; set; }
     }
 
     //public class MyEntity
