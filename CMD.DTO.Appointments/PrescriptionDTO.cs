@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CMD.DTO.Appointments
+{
+    public class PrescriptionDTO
+    {
+        public string Medicine { get; set; }
+        public int Doses { get; set; }
+        public string Intake { get; set; }
+        public int Span { get; set; }
+        public string TimeOfDay { get; set; }
+        public string AdditionalComment { get; set; }
+    }
+}
