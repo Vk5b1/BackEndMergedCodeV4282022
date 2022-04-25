@@ -12,29 +12,45 @@ namespace CMD.Repository.Appointments
 
         public Appointment CreateAppointment(Appointment appointment)
         {
-            if(db.Issues.Any(item => item.Name == appointment.Issue.Name))
-            {
-                appointment.Issue = db.Issues.Where(item => item.Name == appointment.Issue.Name).FirstOrDefault();
-            }
-            else
-            {
-                appointment.Issue = db.Issues.Add(appointment.Issue);
-            }
-
-            appointment.Doctor = db.Doctors.Where(doc => doc.Id == appointment.Doctor.Id).FirstOrDefault();
-
             db.Appointments.Add(appointment);
 
             db.SaveChanges();
 
-            db.Entry(appointment).State = System.Data.Entity.EntityState.Detached;
-
             return appointment;
+        }
+        public PatientDetail CreatePatientDetial(int patientId)
+        {
+            PatientDetail patientDetail = new PatientDetail();
+            patientDetail.Patient = db.Patients.Where(p => p.Id == patientId).First();
+            
+            if(patientDetail.Patient == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            db.PatientDetails.Add(patientDetail);
+            db.SaveChanges();
+            return patientDetail;
+        }
+        public Doctor GetDoctor(int docId)
+        {
+            return db.Doctors.Find(docId);
+        }
+        public Issue AddNewIssue(Issue issue)
+        {
+            return db.Issues.Add(issue);
+        }
+        public Issue GetIssue(int issueId)
+        {
+            return db.Issues.Find(issueId);
         }
 
         public ICollection<Appointment> GetAllAppointment(int doctorId)
         {
-            return db.Appointments.Where(a => a.Doctor.Id == doctorId).ToList();
+            return db.Appointments
+                .Include(path: a => a.Doctor)
+                .Include(path: a => a.PatientDetail.Patient)
+                .Include(path: a => a.Issue)
+                .Where(a => a.Doctor.Id == doctorId).ToList();
         }
 
         public ICollection<Issue> GetIssues()

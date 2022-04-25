@@ -6,10 +6,14 @@ namespace CMD.Model.Appointments
 {
     public class PatientDetail
     {
+        public PatientDetail()
+        {
+            VitalReadings = new HashSet<VitalReading>();
+            MedicalProblems = new HashSet<MedicalProblem>();
+            Prescriptions = new HashSet<Prescription>();
+            TestReports = new HashSet<TestReport>();
+        }
         public int Id { get; set; }
-
-        [ForeignKey("Patient")]
-        public int PatientId { get; set; }
         public Patient Patient { get; set; }
         public ICollection<VitalReading> VitalReadings { get; set; }
         public ICollection<MedicalProblem> MedicalProblems { get; set; }

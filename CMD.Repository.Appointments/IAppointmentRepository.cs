@@ -9,5 +9,9 @@ namespace CMD.Repository.Appointments
         Appointment CreateAppointment(Appointment appointment);
         ICollection<Issue> GetIssues();
         ICollection<Patient> GetRecommededPatients(int doctorId);
+        PatientDetail CreatePatientDetial(int patientId);
+        Doctor GetDoctor(int docId);
+        Issue AddNewIssue(Issue issue);
+        Issue GetIssue(int issueId);
     }
 }

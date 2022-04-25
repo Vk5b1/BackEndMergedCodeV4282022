@@ -5,7 +5,7 @@ namespace CMD.Model.Appointments
     public class Recommedation
     {
         public int RecommedationId { get; set; }
-        [ForeignKey("PatientDetails")]
+        [ForeignKey("PatientDetail")]
         public int PatientDetialId { get; set; }
 
         public PatientDetail PatientDetail { get; set; }

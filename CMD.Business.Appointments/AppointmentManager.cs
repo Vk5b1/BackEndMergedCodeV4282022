@@ -19,25 +19,29 @@ namespace CMD.Business.Appointments
         {
             Appointment appointment = new Appointment()
             {
-                PatientDetail = new PatientDetail { PatientId = appointmentForm.Patient.Id },
+                PatientDetail = repo.CreatePatientDetial(appointmentForm.Patient.Id),
                 AppointmentDate = appointmentForm.AppointmentDate,
                 AppointmentTime = appointmentForm.AppointmentTime,
+                Issue = appointmentForm.Issue.Id == null ? repo.AddNewIssue(new Issue { Name = appointmentForm.Issue.Name }) : repo.GetIssue((int)appointmentForm.Issue.Id),
                 Status = AppointmentStatus.Open,
-                Issue = new Issue { Name = appointmentForm.Issue },
                 Reason = appointmentForm.Reason,
-                Doctor = new Doctor { Id = appointmentForm.Doctor.Id },
+                Doctor = repo.GetDoctor(appointmentForm.Doctor.Id),
             };
 
             Appointment a = repo.CreateAppointment(appointment);
 
-            var aform =  new AppointmentFormDTO()
+            var aform = new AppointmentFormDTO()
             {
                 AppointmentId = a.Id,
                 AppointmentDate = a.AppointmentDate,
                 AppointmentTime = a.AppointmentTime,
                 AppointmentStatus = a.Status.ToString(),
-                Issue = a.Issue.Name,
                 Reason = a.Reason,
+                Issue = new IssueDTO
+                {
+                    Id = a.Issue.Id,
+                    Name = a.Issue.Name,
+                },
                 Doctor = new DoctorDTO
                 {
                     Name = a.Doctor.FirstName + " " + a.Doctor.LastName,
