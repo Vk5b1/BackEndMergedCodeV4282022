@@ -10,8 +10,6 @@ namespace CMD.DTO.Appointments
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime DOB { get; set; }
-        public string PatientPicture { get; set; }
         public string PhoneNumber { get; set; }
     }
 }

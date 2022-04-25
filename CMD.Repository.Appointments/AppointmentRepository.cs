@@ -35,13 +35,17 @@ namespace CMD.Repository.Appointments
         {
             return db.Doctors.Find(docId);
         }
-        public Issue AddNewIssue(Issue issue)
+
+        public Issue GetIssue(string issueName)
         {
-            return db.Issues.Add(issue);
+            return db.Issues.Where(i => i.Name == issueName).Any() ? db.Issues.Where(i => i.Name == issueName).First() : AddNewIssue(new Issue { Name = issueName});
         }
-        public Issue GetIssue(int issueId)
+
+        private Issue AddNewIssue(Issue issue)
         {
-            return db.Issues.Find(issueId);
+            db.Issues.Add(issue);
+            db.SaveChanges();
+            return issue;   
         }
 
         public ICollection<Appointment> GetAllAppointment(int doctorId)

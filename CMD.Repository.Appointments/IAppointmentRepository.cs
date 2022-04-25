@@ -11,7 +11,6 @@ namespace CMD.Repository.Appointments
         ICollection<Patient> GetRecommededPatients(int doctorId);
         PatientDetail CreatePatientDetial(int patientId);
         Doctor GetDoctor(int docId);
-        Issue AddNewIssue(Issue issue);
-        Issue GetIssue(int issueId);
+        Issue GetIssue(string issueName);
     }
 }

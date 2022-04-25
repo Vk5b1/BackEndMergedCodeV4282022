@@ -15,46 +15,34 @@ namespace CMD.Business.Appointments
             this.repo = repo;
         }
 
-        public AppointmentFormDTO AddAppointment(AppointmentFormDTO appointmentForm)
+        public AppointmentConfirmationDTO AddAppointment(AppointmentFormDTO appointmentForm)
         {
             Appointment appointment = new Appointment()
             {
-                PatientDetail = repo.CreatePatientDetial(appointmentForm.Patient.Id),
+                PatientDetail = repo.CreatePatientDetial(appointmentForm.PatientId),
                 AppointmentDate = appointmentForm.AppointmentDate,
                 AppointmentTime = appointmentForm.AppointmentTime,
-                Issue = appointmentForm.Issue.Id == null ? repo.AddNewIssue(new Issue { Name = appointmentForm.Issue.Name }) : repo.GetIssue((int)appointmentForm.Issue.Id),
+                Issue = repo.GetIssue(appointmentForm.Issue),
                 Status = AppointmentStatus.Open,
                 Reason = appointmentForm.Reason,
-                Doctor = repo.GetDoctor(appointmentForm.Doctor.Id),
+                Doctor = repo.GetDoctor(appointmentForm.DoctorId),
             };
 
             Appointment a = repo.CreateAppointment(appointment);
 
-            var aform = new AppointmentFormDTO()
+            var aform = new AppointmentConfirmationDTO()
             {
                 AppointmentId = a.Id,
                 AppointmentDate = a.AppointmentDate,
                 AppointmentTime = a.AppointmentTime,
-                AppointmentStatus = a.Status.ToString(),
+                Status = a.Status.ToString(),
                 Reason = a.Reason,
-                Issue = new IssueDTO
-                {
-                    Id = a.Issue.Id,
-                    Name = a.Issue.Name,
-                },
-                Doctor = new DoctorDTO
-                {
-                    Name = a.Doctor.FirstName + " " + a.Doctor.LastName,
-                    Specialities = a.Doctor.Specialities.Select(x => x.SpecialityName).ToList(),
-                    DoctorPicture = a.Doctor.DoctorPicture,
-                    DOB = a.Doctor.DOB
-                },
-                Patient = new PatientDTO
-                {
-                    Name = a.PatientDetail.Patient.FirstName + " " + a.PatientDetail.Patient.LastName,
-                    DOB = a.PatientDetail.Patient.DOB,
-                    PatientPicture = a.PatientDetail.Patient.PatientPicture
-                }
+                IssueName = a.Issue.Name,
+                PatientName = a.PatientDetail.Patient.FirstName + " " + a.PatientDetail.Patient.LastName,
+                PatientDOB = a.PatientDetail.Patient.DOB,
+                DoctorName = a.Doctor.FirstName + " " + a.Doctor.LastName,
+                DoctorDOB = a.Doctor.DOB,
+                DoctorSpecialities = a.Doctor.Specialities.Select(s => s.SpecialityName).ToList(),
             };
             return aform;
         }
@@ -83,9 +71,7 @@ namespace CMD.Business.Appointments
                 result.Add(new PatientDTOForPatientSearch
                 {
                     Id = patient.Id,
-                    DOB = patient.DOB,
                     Name = patient.FirstName + " " + patient.LastName,
-                    PatientPicture = patient.PatientPicture,
                     PhoneNumber = patient.ContactDetail.PhoneNumber
                 });
             }
@@ -103,6 +89,7 @@ namespace CMD.Business.Appointments
                     AppointmentId = appointment.Id,
                     AppointmentDate = appointment.AppointmentDate,
                     AppointmentTime = appointment.AppointmentTime,
+                    AppointmentStatus = appointment.Status.ToString(),
                     PatientName = appointment.PatientDetail.Patient.FirstName + " " + appointment.PatientDetail.Patient.LastName,
                     PatientPicture = appointment.PatientDetail.Patient.PatientPicture,
                     PatientDOB = appointment.PatientDetail.Patient.DOB,

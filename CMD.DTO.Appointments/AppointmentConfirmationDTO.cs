@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace CMD.DTO.Appointments
 {
-    public class AppointmentBasicInfoDTO
+    public class AppointmentConfirmationDTO
     {
         public int AppointmentId { get; set; }
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
-        public string AppointmentStatus { get; set; }
         public string PatientName { get; set; }
-        public string PatientPicture { get; set; }
         public DateTime PatientDOB { get; set; }
-        public string Issue { get; set; }
+        public string IssueName { get; set; }
+        public string DoctorName { get; set; }
+        public ICollection<string> DoctorSpecialities { get; set; }
+        public DateTime DoctorDOB { get; set; }
+        public string Reason { get; set; }
+        public string Status { get; set; }
     }
 }

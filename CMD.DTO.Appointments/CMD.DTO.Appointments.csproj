@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentBasicInfoDTO.cs" />
+    <Compile Include="AppointmentConfirmationDTO.cs" />
     <Compile Include="AppointmentFormDTO.cs" />
     <Compile Include="DoctorDTO.cs" />
     <Compile Include="IssueDTO.cs" />
