@@ -12,5 +12,8 @@ namespace CMD.Repository.Appointments
         PatientDetail CreatePatientDetial(int patientId);
         Doctor GetDoctor(int docId);
         Issue GetIssue(string issueName);
+        string GetComment(int appointmentId);
+        bool EditComment(int appointmentId, string comment);
+        
     }
 }

@@ -63,6 +63,33 @@ namespace CMD.API.Appointments.Controllers
             return Ok(issuesDTO);
         }
 
+        #region Praveen Code
+
+        // GET: api/appointment/comment/{appointmentId}
+        [HttpGet]
+        [Route("comment/{appointmentId}")]
+        [ResponseType(typeof(AppointmentCommentDTO))]
+        public IHttpActionResult GetComment(int appointmentId)
+        {
+            var a = appointmentManager.GetAppointmentComment(appointmentId);
+            return Ok(a);
+        }
+
+        // PUT: api/appointment/comment/{appointmentId}
+        [HttpPut]
+        [Route("comment/{appointmentId}")]
+        [ResponseType(typeof (AppointmentCommentDTO))]
+        public IHttpActionResult EditComment(int appointmentId, AppointmentCommentDTO comment)
+        {
+            var a = appointmentManager.UpdateAppointmentComment(appointmentId, comment);
+            if(!a)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+        #endregion
 
         // POST: api/appointment/add
         [HttpPost]
@@ -77,6 +104,7 @@ namespace CMD.API.Appointments.Controllers
             AppointmentFormDTO appointmentForm = jsonData;
             var result = appointmentManager.AddAppointment(appointmentForm);
             return Created($"api/appointment/{result.AppointmentId}", result);
-        }        
+        }
+        
     }
 }

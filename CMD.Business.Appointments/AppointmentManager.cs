@@ -47,6 +47,7 @@ namespace CMD.Business.Appointments
             return aform;
         }
 
+
         public ICollection<IssueDTO> GetIssues()
         {
             ICollection<Issue> issues = repo.GetIssues();
@@ -77,6 +78,20 @@ namespace CMD.Business.Appointments
             }
             return result;
         }
+
+        #region Praveen Code
+
+        public AppointmentCommentDTO GetAppointmentComment(int appointmentId)
+        {
+            return new AppointmentCommentDTO { Comment = repo.GetComment(appointmentId) };
+        }
+
+        public bool UpdateAppointmentComment(int appointmentId, AppointmentCommentDTO appointmentComment)
+        {
+            return repo.EditComment(appointmentId, appointmentComment.Comment);
+        }
+
+        #endregion
 
         ICollection<AppointmentBasicInfoDTO> IAppointmentManager.GetAllAppointment(int doctorId)
         {

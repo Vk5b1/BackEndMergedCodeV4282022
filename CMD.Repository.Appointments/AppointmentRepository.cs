@@ -66,5 +66,22 @@ namespace CMD.Repository.Appointments
         {
             return db.Recommedations.Where(r => r.RecommendedDoctorId == doctorId).Select(r => r.PatientDetail.Patient).Include(p => p.ContactDetail).ToList();
         }
+
+        #region Praveen Code
+
+        public string GetComment(int appointmentId)
+        {
+            return db.Appointments.Where(a => a.Id == appointmentId).Select(a => a.Comment).FirstOrDefault();
+        }
+
+        public bool EditComment(int appointmentId, string comment)
+        {
+            var appointment = db.Appointments.Find(appointmentId);
+            appointment.Comment = comment;
+            db.Entry(appointment).State = EntityState.Modified;
+            return db.SaveChanges() > 0;
+        }
+
+        #endregion
     }
 }
