@@ -48,9 +48,9 @@ namespace CMD.Repository.Appointments
             return issue;   
         }
 
-        public int AppointmentCount()
+        public int AppointmentCount(int doctorId)
         {
-            return db.Appointments.Count();
+            return db.Appointments.Where(a => a.Doctor.Id == doctorId).Count();
         }
 
         public ICollection<Appointment> GetAllAppointment(int doctorId)
@@ -73,21 +73,25 @@ namespace CMD.Repository.Appointments
             return db.Patients.ToList();
         }
 
-        #region Praveen Code
-
-        public string GetComment(int appointmentId)
-        {
-            return db.Appointments.Where(a => a.Id == appointmentId).Select(a => a.Comment).FirstOrDefault();
-        }
-
-        public bool EditComment(int appointmentId, string comment)
+        public bool AcceptApppointment(int appointmentId)
         {
             var appointment = db.Appointments.Find(appointmentId);
-            appointment.Comment = comment;
-            db.Entry(appointment).State = EntityState.Modified;
+
+            appointment.Status = AppointmentStatus.Confirmed;
             return db.SaveChanges() > 0;
         }
 
-        #endregion
+        public bool RejectApppointment(int appointmentId)
+        {
+            var appointment = db.Appointments.Find(appointmentId);
+
+            appointment.Status = AppointmentStatus.Cancelled;
+            return db.SaveChanges() > 0;
+        }
+
+        public bool DoctorAppointmentValidate(int appointmentId, int doctorId)
+        {
+            return db.Appointments.Find(appointmentId).Doctor.Id == doctorId;
+        }
     }
 }

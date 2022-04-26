@@ -45,6 +45,7 @@
     <Compile Include="AppointmentCommentDTO.cs" />
     <Compile Include="AppointmentConfirmationDTO.cs" />
     <Compile Include="AppointmentFormDTO.cs" />
+    <Compile Include="AppointmentStatusDTO.cs" />
     <Compile Include="DoctorDTO.cs" />
     <Compile Include="IssueDTO.cs" />
     <Compile Include="PaginationMetaData.cs" />

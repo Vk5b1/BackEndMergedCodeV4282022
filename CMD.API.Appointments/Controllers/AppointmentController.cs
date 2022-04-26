@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net;
 
 namespace CMD.API.Appointments.Controllers
 {
@@ -33,7 +34,7 @@ namespace CMD.API.Appointments.Controllers
                 return Ok("No appointment");
             }
 
-            var totalAppointmentCount = appointmentManager.GetAppointmentCount();
+            var totalAppointmentCount = appointmentManager.GetAppointmentCount(doctorId);
 
             var paginationMetaData = new PaginationMetaData(totalAppointmentCount, parameters.Page, parameters.ItemsPerPage);
             var responseData = new
@@ -41,7 +42,7 @@ namespace CMD.API.Appointments.Controllers
                 paginationMetaData,
                 appointments
             };
-            var response = Request.CreateResponse(System.Net.HttpStatusCode.OK, responseData);
+            var response = Request.CreateResponse(HttpStatusCode.OK, responseData);
             return ResponseMessage(response);
         }
 
@@ -73,34 +74,15 @@ namespace CMD.API.Appointments.Controllers
             return Ok(isssues);
         }
 
-        #region Praveen Code
-
-        // GET: api/appointment/comment/{appointmentId}
-        [HttpGet]
-        [Route("comment/{appointmentId}")]
-        [ResponseType(typeof(AppointmentCommentDTO))]
-        public IHttpActionResult GetComment(int appointmentId)
-        {
-            var a = appointmentManager.GetAppointmentComment(appointmentId);
-            return Ok(a);
-        }
-
-
-        // PUT: api/appointment/comment/{appointmentId}
+        // PUT: api/appointment/acceptappointment/{appointmentId}/doctorId/{doctorId}
         [HttpPut]
-        [Route("comment/{appointmentId}")]
-        [ResponseType(typeof (AppointmentCommentDTO))]
-        public IHttpActionResult EditComment(int appointmentId, AppointmentCommentDTO comment)
+        [Route("changestatus/doctorId/{doctorId}")]
+        public IHttpActionResult ChangeStatus([FromBody]AppointmentStatusDTO appDTO, int doctorId)
         {
-            var a = appointmentManager.UpdateAppointmentComment(appointmentId, comment);
-            if(!a)
-            {
-                return BadRequest();
-            }
-            return Ok();
+            var result = appointmentManager.ChangeAppointmentStatus(appDTO, doctorId);
+            var response = Request.CreateResponse((result ?HttpStatusCode.NoContent:HttpStatusCode.PreconditionFailed));
+            return ResponseMessage(response);
         }
-
-        #endregion
 
         // POST: api/appointment/create
         [HttpPost]

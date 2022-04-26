@@ -6,11 +6,10 @@ namespace CMD.Business.Appointments
     public interface IAppointmentManager
     {
         ICollection<AppointmentBasicInfoDTO> GetAllAppointment(int doctorId, PaginationParams pagination);
-        int GetAppointmentCount();
+        int GetAppointmentCount(int doctorId);
         AppointmentConfirmationDTO AddAppointment(AppointmentFormDTO appointmentForm);
         ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId);
         ICollection<string> GetIssues();
-        AppointmentCommentDTO GetAppointmentComment(int appointmentId);
-        bool UpdateAppointmentComment(int appointmentId, AppointmentCommentDTO appointmentComment);   
+        bool ChangeAppointmentStatus(AppointmentStatusDTO statusDTO, int doctorId);
     }
 }

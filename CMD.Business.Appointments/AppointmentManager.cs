@@ -53,7 +53,7 @@ namespace CMD.Business.Appointments
             return repo.GetIssues();
         }
 
-        public ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId)
+        public ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId) // **
         {
             ICollection<Patient> recommededPatients = repo.GetPatients(doctorId);
             ICollection<PatientDTOForPatientSearch> result = new List<PatientDTOForPatientSearch>();
@@ -68,20 +68,6 @@ namespace CMD.Business.Appointments
             }
             return result;
         }
-
-        #region Praveen Code
-
-        public AppointmentCommentDTO GetAppointmentComment(int appointmentId)
-        {
-            return new AppointmentCommentDTO { Comment = repo.GetComment(appointmentId) };
-        }
-
-        public bool UpdateAppointmentComment(int appointmentId, AppointmentCommentDTO appointmentComment)
-        {
-            return repo.EditComment(appointmentId, appointmentComment.Comment);
-        }
-
-        #endregion
 
         public ICollection<AppointmentBasicInfoDTO> GetAllAppointment(int doctorId, PaginationParams pagination)
         {
@@ -103,10 +89,23 @@ namespace CMD.Business.Appointments
             }
             return result;
         }
-        public int GetAppointmentCount()
+        public int GetAppointmentCount(int doctorId)
         {
-            return repo.AppointmentCount();
+            return repo.AppointmentCount(doctorId);
         }
 
+        public bool ChangeAppointmentStatus(AppointmentStatusDTO statusDTO, int doctorId)
+        {
+            var result = false;
+            if(statusDTO.Status == "Confirmed")
+            {
+                result = repo.AcceptApppointment(statusDTO.AppointmentId);
+            }
+            else if(statusDTO.Status == "Cancelled")
+            {
+                result = repo.RejectApppointment(statusDTO.AppointmentId);
+            }
+            return result;
+        }
     }
 }
