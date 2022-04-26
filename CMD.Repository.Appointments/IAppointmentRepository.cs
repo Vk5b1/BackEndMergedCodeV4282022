@@ -6,9 +6,10 @@ namespace CMD.Repository.Appointments
     public interface IAppointmentRepository
     {
         ICollection<Appointment> GetAllAppointment(int doctorId);
+        int AppointmentCount();
         Appointment CreateAppointment(Appointment appointment);
-        ICollection<Issue> GetIssues();
-        ICollection<Patient> GetRecommededPatients(int doctorId);
+        ICollection<string> GetIssues();
+        ICollection<Patient> GetPatients(int doctorId);
         PatientDetail CreatePatientDetial(int patientId);
         Doctor GetDoctor(int docId);
         Issue GetIssue(string issueName);

@@ -14,7 +14,8 @@ namespace CMD.API.Appointments
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            var cors = new EnableCorsAttribute("*", "*", "*");
+
+            EnableCorsAttribute cors = new EnableCorsAttribute(origins:"*", headers:"*", methods:"*");
             config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(

@@ -2,12 +2,15 @@
 using CMD.DTO.Appointments;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace CMD.API.Appointments.Controllers
 {
-    [RoutePrefix("api/appointment")]
+    [RoutePrefix("api/appointment")]    
     public class AppointmentController : ApiController
     {
         protected IAppointmentManager appointmentManager;
@@ -17,30 +20,38 @@ namespace CMD.API.Appointments.Controllers
             this.appointmentManager = appointmentManager;
         }
 
-
         // GET: api/appointment/allappointments/{doctorId}
         [HttpGet]
         [Route("allappointments/{doctorId}")]
         [ResponseType(typeof(AppointmentBasicInfoDTO))]
-        public IHttpActionResult GetAllAppointment(int doctorId)
+        public IHttpActionResult GetAllAppointment(int doctorId, [FromUri]PaginationParams parameters)
         {
-            ICollection<AppointmentBasicInfoDTO> appointment = appointmentManager.GetAllAppointment(doctorId);
+            ICollection<AppointmentBasicInfoDTO> appointments = appointmentManager.GetAllAppointment(doctorId, parameters);
 
-            if(appointment.Count() == 0)
+            if(appointments.Count() == 0)
             {
-                return NotFound();
+                return Ok("No appointment");
             }
 
-            return Ok(appointment);
+            var totalAppointmentCount = appointmentManager.GetAppointmentCount();
+
+            var paginationMetaData = new PaginationMetaData(totalAppointmentCount, parameters.Page, parameters.ItemsPerPage);
+            var responseData = new
+            {
+                paginationMetaData,
+                appointments
+            };
+            var response = Request.CreateResponse(System.Net.HttpStatusCode.OK, responseData);
+            return ResponseMessage(response);
         }
 
         // GET: api/appointment/recommendedpatient/{doctorId}
         [HttpGet]
-        [Route("recommededpatient/{doctorId}")]
+        [Route("patients/{doctorId}")]
         [ResponseType(typeof(PatientDTOForPatientSearch))]
-        public IHttpActionResult GetAllRecommendedPatient(int doctorId)
+        public IHttpActionResult GetAllPatient(int doctorId)
         {
-            ICollection<PatientDTOForPatientSearch> patientsDTO = appointmentManager.GetRecommendedPatients(doctorId);
+            ICollection<PatientDTOForPatientSearch> patientsDTO = appointmentManager.GetPatients(doctorId);
             if(patientsDTO.Count() == 0)
             {
                 return NotFound();
@@ -48,19 +59,18 @@ namespace CMD.API.Appointments.Controllers
             return Ok(patientsDTO);
         }
 
-
         // GET: api/appointment/issues
         [HttpGet]
         [Route("issues")]
         [ResponseType(typeof(IssueDTO))]
         public IHttpActionResult GetAllIssues()
         {
-            ICollection<IssueDTO> issuesDTO = appointmentManager.GetIssues();
-            if(issuesDTO.Count() == 0)
+            var isssues = appointmentManager.GetIssues();
+            if(isssues.Count() == 0)
             {
                 return NotFound();
             }
-            return Ok(issuesDTO);
+            return Ok(isssues);
         }
 
         #region Praveen Code
@@ -74,6 +84,7 @@ namespace CMD.API.Appointments.Controllers
             var a = appointmentManager.GetAppointmentComment(appointmentId);
             return Ok(a);
         }
+
 
         // PUT: api/appointment/comment/{appointmentId}
         [HttpPut]
@@ -91,7 +102,7 @@ namespace CMD.API.Appointments.Controllers
 
         #endregion
 
-        // POST: api/appointment/add
+        // POST: api/appointment/create
         [HttpPost]
         [Route("create")]
         [ResponseType(typeof(AppointmentFormDTO))]

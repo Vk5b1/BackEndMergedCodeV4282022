@@ -47,6 +47,8 @@
     <Compile Include="AppointmentFormDTO.cs" />
     <Compile Include="DoctorDTO.cs" />
     <Compile Include="IssueDTO.cs" />
+    <Compile Include="PaginationMetaData.cs" />
+    <Compile Include="PaginationParams.cs" />
     <Compile Include="PatientDTO.cs" />
     <Compile Include="PatientDTOForPatientSearch.cs" />
     <Compile Include="PrescriptionDTO.cs" />

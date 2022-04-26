@@ -48,23 +48,29 @@ namespace CMD.Repository.Appointments
             return issue;   
         }
 
+        public int AppointmentCount()
+        {
+            return db.Appointments.Count();
+        }
+
         public ICollection<Appointment> GetAllAppointment(int doctorId)
         {
-            return db.Appointments
+            var allAppointments = db.Appointments
                 .Include(path: a => a.Doctor)
                 .Include(path: a => a.PatientDetail.Patient)
                 .Include(path: a => a.Issue)
-                .Where(a => a.Doctor.Id == doctorId).ToList();
+                .Where(a => a.Doctor.Id == doctorId).OrderBy(a => a.AppointmentDate).ThenBy(a => a.AppointmentTime).ToList();
+            return allAppointments;
         }
 
-        public ICollection<Issue> GetIssues()
+        public ICollection<string> GetIssues()
         {
-            return db.Issues.ToList();
+            return db.Issues.Select(i => i.Name).ToList();
         }
 
-        public ICollection<Patient> GetRecommededPatients(int doctorId)
+        public ICollection<Patient> GetPatients(int doctorId)
         {
-            return db.Recommedations.Where(r => r.RecommendedDoctorId == doctorId).Select(r => r.PatientDetail.Patient).Include(p => p.ContactDetail).ToList();
+            return db.Patients.ToList();
         }
 
         #region Praveen Code

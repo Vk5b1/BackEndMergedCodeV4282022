@@ -48,24 +48,14 @@ namespace CMD.Business.Appointments
         }
 
 
-        public ICollection<IssueDTO> GetIssues()
+        public ICollection<string> GetIssues()
         {
-            ICollection<Issue> issues = repo.GetIssues();
-            ICollection<IssueDTO> result = new List<IssueDTO>();
-            foreach(Issue issue in issues)
-            {
-                result.Add(new IssueDTO
-                {
-                    Id = issue.Id,
-                    Name = issue.Name,
-                });
-            }
-            return result;
+            return repo.GetIssues();
         }
 
-        public ICollection<PatientDTOForPatientSearch> GetRecommendedPatients(int doctorId)
+        public ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId)
         {
-            ICollection<Patient> recommededPatients = repo.GetRecommededPatients(doctorId);
+            ICollection<Patient> recommededPatients = repo.GetPatients(doctorId);
             ICollection<PatientDTOForPatientSearch> result = new List<PatientDTOForPatientSearch>();
             foreach(Patient patient in recommededPatients)
             {
@@ -93,9 +83,9 @@ namespace CMD.Business.Appointments
 
         #endregion
 
-        ICollection<AppointmentBasicInfoDTO> IAppointmentManager.GetAllAppointment(int doctorId)
+        public ICollection<AppointmentBasicInfoDTO> GetAllAppointment(int doctorId, PaginationParams pagination)
         {
-            ICollection<Appointment> appointments = repo.GetAllAppointment(doctorId);
+            ICollection<Appointment> appointments = repo.GetAllAppointment(doctorId).Skip((pagination.Page - 1) * pagination.ItemsPerPage).Take(pagination.ItemsPerPage).ToList();
             ICollection<AppointmentBasicInfoDTO> result = new List<AppointmentBasicInfoDTO>();
             foreach (var appointment in appointments)
             {
@@ -113,5 +103,10 @@ namespace CMD.Business.Appointments
             }
             return result;
         }
+        public int GetAppointmentCount()
+        {
+            return repo.AppointmentCount();
+        }
+
     }
 }
