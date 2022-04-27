@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMD.Model.Appointments
 {
     public class Appointment
     {
+        public Appointment()
+        {
+            Recommedations = new HashSet<Recommedation>();
+            Status = AppointmentStatus.Open;
+            FeedBack = new FeedBack();
+        }
+
         public int Id { get; set; }
         public string Comment { get; set; }
         public virtual FeedBack FeedBack { get; set; }
@@ -16,5 +24,6 @@ namespace CMD.Model.Appointments
         public Issue Issue { get; set; }
         public Doctor Doctor { get; set; }
         public PatientDetail PatientDetail { get; set; }
+        public ICollection<Recommedation> Recommedations { get; set; }
     }
 }

@@ -149,6 +149,10 @@
       <Project>{1870AEA3-2504-4179-A7EF-796F7ABFE775}</Project>
       <Name>CMD.DTO.Appointments</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CMD.Repository.Appointments\CMD.Repository.Appointments.csproj">
+      <Project>{B5BAFE28-0993-42FC-A9C3-B5272AA69FF7}</Project>
+      <Name>CMD.Repository.Appointments</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -165,7 +169,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62019</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44317/</IISUrl>
+          <IISUrl>https://localhost:44301/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

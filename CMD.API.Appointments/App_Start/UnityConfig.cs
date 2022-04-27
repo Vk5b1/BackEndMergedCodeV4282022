@@ -1,4 +1,5 @@
 using CMD.Business.Appointments;
+using CMD.Repository.Appointments;
 using System;
 
 using Unity;
@@ -44,6 +45,7 @@ namespace CMD.API.Appointments
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IAppointmentManager, AppointmentManager>();
+            container.RegisterType<IAppointmentRepository, AppointmentRepository>();
         }
     }
 }

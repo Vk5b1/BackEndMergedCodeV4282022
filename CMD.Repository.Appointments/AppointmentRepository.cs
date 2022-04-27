@@ -13,17 +13,26 @@ namespace CMD.Repository.Appointments
         public Appointment CreateAppointment(Appointment appointment)
         {
             db.Appointments.Add(appointment);
+            var questions = db.Questions.ToList();
+
+            if (questions.Any())
+            {
+                questions.ForEach(x => appointment.FeedBack.Rating.Add(new QuestionRating { Question = x }));
+            }
 
             db.SaveChanges();
 
             return appointment;
         }
+
         public PatientDetail CreatePatientDetial(int patientId)
         {
-            PatientDetail patientDetail = new PatientDetail();
-            patientDetail.Patient = db.Patients.Where(p => p.Id == patientId).First();
-            
-            if(patientDetail.Patient == null)
+            PatientDetail patientDetail = new PatientDetail
+            {
+                Patient = db.Patients.Where(p => p.Id == patientId).First()
+            };
+
+            if (patientDetail.Patient == null)
             {
                 throw new KeyNotFoundException();
             }
@@ -31,6 +40,7 @@ namespace CMD.Repository.Appointments
             db.SaveChanges();
             return patientDetail;
         }
+
         public Doctor GetDoctor(int docId)
         {
             return db.Doctors.Find(docId);
@@ -51,6 +61,11 @@ namespace CMD.Repository.Appointments
         public int AppointmentCount(int doctorId)
         {
             return db.Appointments.Where(a => a.Doctor.Id == doctorId).Count();
+        }
+
+        public int AppointmentCount(int doctorId, string status)
+        {
+            return db.Appointments.Where(a => a.Doctor.Id == doctorId && a.Status.ToString().ToLower().Equals(status.ToLower())).Count();
         }
 
         public ICollection<Appointment> GetAllAppointment(int doctorId)

@@ -10,7 +10,7 @@ namespace CMD.Business.Appointments
     {
         protected IAppointmentRepository repo;
 
-        public AppointmentManager(AppointmentRepository repo)
+        public AppointmentManager(IAppointmentRepository repo)
         {
             this.repo = repo;
         }
@@ -38,11 +38,10 @@ namespace CMD.Business.Appointments
                 Status = a.Status.ToString(),
                 Reason = a.Reason,
                 IssueName = a.Issue.Name,
-                PatientName = a.PatientDetail.Patient.FirstName + " " + a.PatientDetail.Patient.LastName,
+                PatientName = a.PatientDetail.Patient.Name,
                 PatientDOB = a.PatientDetail.Patient.DOB,
-                DoctorName = a.Doctor.FirstName + " " + a.Doctor.LastName,
-                DoctorDOB = a.Doctor.DOB,
-                DoctorSpecialities = a.Doctor.Specialities.Select(s => s.SpecialityName).ToList(),
+                DoctorName = a.Doctor.Name,
+                DoctorSpeciality = a.Doctor.Speciality,
             };
             return aform;
         }
@@ -53,7 +52,7 @@ namespace CMD.Business.Appointments
             return repo.GetIssues();
         }
 
-        public ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId) // **
+        public ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId)
         {
             ICollection<Patient> recommededPatients = repo.GetPatients(doctorId);
             ICollection<PatientDTOForPatientSearch> result = new List<PatientDTOForPatientSearch>();
@@ -62,8 +61,29 @@ namespace CMD.Business.Appointments
                 result.Add(new PatientDTOForPatientSearch
                 {
                     Id = patient.Id,
-                    Name = patient.FirstName + " " + patient.LastName,
+                    Name = patient.Name,
                     PhoneNumber = patient.ContactDetail.PhoneNumber
+                });
+            }
+            return result;
+        }
+
+        public ICollection<AppointmentBasicInfoDTO> GetAllAppointment(int doctorId, string status, PaginationParams pagination)
+        {
+            ICollection<Appointment> appointments = repo.GetAllAppointment(doctorId).Where(a => a.Status.ToString().ToLower().Equals(status.ToLower())).Skip((pagination.Page - 1) * pagination.ItemsPerPage).Take(pagination.ItemsPerPage).ToList();
+            ICollection<AppointmentBasicInfoDTO> result = new List<AppointmentBasicInfoDTO>();
+            foreach (var appointment in appointments)
+            {
+                result.Add(new AppointmentBasicInfoDTO()
+                {
+                    AppointmentId = appointment.Id,
+                    AppointmentDate = appointment.AppointmentDate,
+                    AppointmentTime = appointment.AppointmentTime,
+                    AppointmentStatus = appointment.Status.ToString(),
+                    PatientName = appointment.PatientDetail.Patient.Name,
+                    PatientPicture = appointment.PatientDetail.Patient.PatientPicture,
+                    PatientDOB = appointment.PatientDetail.Patient.DOB,
+                    Issue = appointment.Issue.Name
                 });
             }
             return result;
@@ -81,7 +101,7 @@ namespace CMD.Business.Appointments
                     AppointmentDate = appointment.AppointmentDate,
                     AppointmentTime = appointment.AppointmentTime,
                     AppointmentStatus = appointment.Status.ToString(),
-                    PatientName = appointment.PatientDetail.Patient.FirstName + " " + appointment.PatientDetail.Patient.LastName,
+                    PatientName = appointment.PatientDetail.Patient.Name ,
                     PatientPicture = appointment.PatientDetail.Patient.PatientPicture,
                     PatientDOB = appointment.PatientDetail.Patient.DOB,
                     Issue = appointment.Issue.Name
@@ -92,6 +112,10 @@ namespace CMD.Business.Appointments
         public int GetAppointmentCount(int doctorId)
         {
             return repo.AppointmentCount(doctorId);
+        }
+        public int GetAppointmentCountBasedOnStatus(int doctorId, string status)
+        {
+            return repo.AppointmentCount(doctorId, status);
         }
 
         public bool ChangeAppointmentStatus(AppointmentStatusDTO statusDTO, int doctorId)
@@ -107,5 +131,6 @@ namespace CMD.Business.Appointments
             }
             return result;
         }
+
     }
 }

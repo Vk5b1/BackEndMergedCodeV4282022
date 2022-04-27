@@ -36,13 +36,29 @@ namespace CMD.API.Appointments.Controllers
 
             var totalAppointmentCount = appointmentManager.GetAppointmentCount(doctorId);
 
-            var paginationMetaData = new PaginationMetaData(totalAppointmentCount, parameters.Page, parameters.ItemsPerPage);
-            var responseData = new
+            var paginationMetaData = new PaginationMetaData(totalAppointmentCount, parameters.Page, parameters.ItemsPerPage, appointments);
+            
+            var response = Request.CreateResponse(HttpStatusCode.OK, paginationMetaData);
+            return ResponseMessage(response);
+        }
+
+        [HttpGet]
+        [Route("allappointments/{status}/{doctorId}")]
+        [ResponseType(typeof(AppointmentBasicInfoDTO))]
+        public IHttpActionResult GetAllAppointmentBasedOnStatus(int doctorId, string status, [FromUri] PaginationParams parameters)
+        {
+            ICollection<AppointmentBasicInfoDTO> appointments = appointmentManager.GetAllAppointment(doctorId, status,parameters);
+
+            if (appointments.Count() == 0)
             {
-                paginationMetaData,
-                appointments
-            };
-            var response = Request.CreateResponse(HttpStatusCode.OK, responseData);
+                return Ok("No appointment");
+            }
+
+            var totalAppointmentCount = appointmentManager.GetAppointmentCountBasedOnStatus(doctorId, status);
+
+            var paginationMetaData = new PaginationMetaData(totalAppointmentCount, parameters.Page, parameters.ItemsPerPage, appointments);
+            
+            var response = Request.CreateResponse(HttpStatusCode.OK, paginationMetaData);
             return ResponseMessage(response);
         }
 

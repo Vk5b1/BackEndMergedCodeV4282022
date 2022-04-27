@@ -1,18 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMD.Model.Appointments
 {
     public class Recommedation
     {
-        public int RecommedationId { get; set; }
-        [ForeignKey("PatientDetail")]
-        public int PatientDetialId { get; set; }
-
-        public PatientDetail PatientDetail { get; set; }
-
-        [ForeignKey("RecommendedDoctor")]
-        public int RecommendedDoctorId { get; set; }
-
+        public int RecommedationId { get; set; }      
         public Doctor RecommendedDoctor { get; set; }
+        public int DoctorId { get; set; }
+        public int AppointmentId { get; set; }
     }
 }

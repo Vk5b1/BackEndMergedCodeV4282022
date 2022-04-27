@@ -7,6 +7,7 @@ namespace CMD.Repository.Appointments
     {
         ICollection<Appointment> GetAllAppointment(int doctorId);
         int AppointmentCount(int doctorId);
+        int AppointmentCount(int doctorId, string status);
         Appointment CreateAppointment(Appointment appointment);
         ICollection<string> GetIssues();
         ICollection<Patient> GetPatients(int doctorId);
