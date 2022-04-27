@@ -5,7 +5,6 @@ namespace CMD.Repository.Appointments
 {
     public interface IAppointmentRepository
     {
-        #region Subham
         ICollection<Appointment> GetAllAppointment(int doctorId);
         int AppointmentCount(int doctorId);
         int AppointmentCount(int doctorId, string status);
@@ -18,12 +17,5 @@ namespace CMD.Repository.Appointments
         bool DoctorAppointmentValidate(int appointmentId, int doctorId);
         bool AcceptApppointment(int appointmentId);
         bool RejectApppointment(int appointmentId);
-
-        #endregion
-
-        #region KCS Kishore
-        List<int> GetIdsAssociatedWithAppointment(int appointmentId);
-
-        #endregion
     }
 }

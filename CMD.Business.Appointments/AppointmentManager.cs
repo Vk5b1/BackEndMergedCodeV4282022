@@ -15,7 +15,6 @@ namespace CMD.Business.Appointments
             this.repo = repo;
         }
 
-        #region Subham 
         public AppointmentConfirmationDTO AddAppointment(AppointmentFormDTO appointmentForm)
         {
             Appointment appointment = new Appointment()
@@ -133,19 +132,5 @@ namespace CMD.Business.Appointments
             return result;
         }
 
-        #endregion
-
-        #region KCS Kishore
-
-        public IdsListViewDetailsDTO GetIdsAssociatedWithAppointment(int appointmentId)
-        {
-            IdsListViewDetailsDTO idsListViewDetailsDTO = new IdsListViewDetailsDTO();
-            var temp = repo.GetIdsAssociatedWithAppointment(appointmentId);
-            idsListViewDetailsDTO.AppointmentId = temp[0];
-            idsListViewDetailsDTO.PatientId = temp[1];
-            idsListViewDetailsDTO.DoctorId = temp[2];
-            return idsListViewDetailsDTO;
-        }
-        #endregion
     }
 }
