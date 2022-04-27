@@ -10,6 +10,8 @@ namespace CMD.Repository.Appointments
     {
         protected CMDAppointmentContext db = new CMDAppointmentContext();
 
+        #region Subham
+
         public Appointment CreateAppointment(Appointment appointment)
         {
             db.Appointments.Add(appointment);
@@ -108,5 +110,20 @@ namespace CMD.Repository.Appointments
         {
             return db.Appointments.Find(appointmentId).Doctor.Id == doctorId;
         }
+
+        #endregion
+
+        #region KCS Kishore
+        public List<int> GetIdsAssociatedWithAppointment(int appointmentId)
+        {
+            return db.Appointments.Where(x => x.Id == appointmentId).Select(x => new List<int>
+            {
+                x.Id,
+                x.PatientDetail.Patient.Id,
+                x.Doctor.Id
+            }).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

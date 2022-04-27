@@ -114,6 +114,18 @@ namespace CMD.API.Appointments.Controllers
             var result = appointmentManager.AddAppointment(appointmentForm);
             return Created($"api/appointment/{result.AppointmentId}", result);
         }
-        
+
+        #region KCS Kishore
+
+        [HttpGet]
+        [Route("getIds/{appointmentId}")]
+        [ResponseType(typeof(int[]))]
+        public IHttpActionResult GetIdsAssociatedWithAppointment(int appointmentId)
+        {
+            return Ok(appointmentManager.GetIdsAssociatedWithAppointment(appointmentId));
+        }
+
+        #endregion
+
     }
 }
