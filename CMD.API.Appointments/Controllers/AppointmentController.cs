@@ -8,6 +8,8 @@ using System.Web.Http.Description;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net;
+using CMD.Business.Appointments.CustomExceptions;
+using System;
 
 namespace CMD.API.Appointments.Controllers
 {
@@ -96,7 +98,7 @@ namespace CMD.API.Appointments.Controllers
         public IHttpActionResult ChangeStatus([FromBody]AppointmentStatusDTO appDTO, int doctorId)
         {
             var result = appointmentManager.ChangeAppointmentStatus(appDTO, doctorId);
-            var response = Request.CreateResponse((result ?HttpStatusCode.NoContent:HttpStatusCode.PreconditionFailed));
+            var response = Request.CreateResponse(result ?HttpStatusCode.NoContent:HttpStatusCode.PreconditionFailed);
             return ResponseMessage(response);
         }
 
@@ -110,10 +112,74 @@ namespace CMD.API.Appointments.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            AppointmentConfirmationDTO result = null;
+
             AppointmentFormDTO appointmentForm = jsonData;
-            var result = appointmentManager.AddAppointment(appointmentForm);
+            try
+            {
+                result = appointmentManager.AddAppointment(appointmentForm);
+            }
+            catch (DateNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (PastDateException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NullReferenceException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(SameAppointmentTimingException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Created($"api/appointment/{result.AppointmentId}", result);
         }
-        
+
+        #region kishore code
+        // GET: api/appointment/allappointments/{doctorId}
+        [HttpGet]
+        [Route("getIds/{appointmentId}")]
+        [ResponseType(typeof(int[]))]
+        public IHttpActionResult GetIdsAssociatedWithAppointment(int appointmentId)
+        {
+            return Ok(appointmentManager.GetIdsAssociatedWithAppointment(appointmentId));
+        }
+        #endregion
+
+        #region Praveen Code
+
+        // GET: api/appointment/comment/{appointmentId}
+        [HttpGet]
+        [Route("comment/{appointmentId}")]
+        [ResponseType(typeof(AppointmentCommentDTO))]
+        public IHttpActionResult GetComment(int appointmentId)
+        {
+            var a = appointmentManager.GetAppointmentComment(appointmentId);
+            return Ok(a);
+        }
+
+
+        // PUT: api/appointment/comment/{appointmentId}
+        [HttpPut]
+        [Route("comment/{appointmentId}")]
+        [ResponseType(typeof(AppointmentCommentDTO))]
+        public IHttpActionResult EditComment(int appointmentId, AppointmentCommentDTO comment)
+        {
+            var a = appointmentManager.UpdateAppointmentComment(appointmentId, comment);
+            if (!a)
+            {
+                return BadRequest();
+            }
+            return Ok(comment);
+        }
+        #endregion
     }
 }

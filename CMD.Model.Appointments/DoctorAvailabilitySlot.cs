@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CMD.Model.Appointments
+namespace CMD.Model
 {
     public class DoctorAvailabilitySlot
     {

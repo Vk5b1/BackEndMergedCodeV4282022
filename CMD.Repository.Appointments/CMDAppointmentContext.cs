@@ -1,4 +1,4 @@
-using CMD.Model.Appointments;
+using CMD.Model;
 using System.Data.Entity;
 
 namespace CMD.Repository.Appointments

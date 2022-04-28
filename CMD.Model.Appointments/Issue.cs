@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CMD.Model.Appointments
+namespace CMD.Model
 {
     public class Issue
     {

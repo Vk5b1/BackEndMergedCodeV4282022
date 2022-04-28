@@ -42,17 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentManager.cs" />
+    <Compile Include="CustomExceptions\DateNullException.cs" />
     <Compile Include="IAppointmentManager.cs" />
+    <Compile Include="CustomExceptions\PastDateException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomExceptions\SameAppointmentTimingException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CMD.DTO.Appointments\CMD.DTO.Appointments.csproj">
       <Project>{1870aea3-2504-4179-a7ef-796f7abfe775}</Project>
       <Name>CMD.DTO.Appointments</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CMD.Model.Appointments\CMD.Model.Appointments.csproj">
+    <ProjectReference Include="..\CMD.Model.Appointments\CMD.Model.csproj">
       <Project>{5b18163f-3076-4ffa-83c1-2a3ecae01de4}</Project>
-      <Name>CMD.Model.Appointments</Name>
+      <Name>CMD.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\CMD.Repository.Appointments\CMD.Repository.Appointments.csproj">
       <Project>{B5BAFE28-0993-42FC-A9C3-B5272AA69FF7}</Project>

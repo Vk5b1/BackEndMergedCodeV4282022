@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CMD.Model.Appointments
+namespace CMD.Model
 {
     public class FeedBack
     {

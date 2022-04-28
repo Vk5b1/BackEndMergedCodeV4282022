@@ -60,9 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CMD.Model.Appointments\CMD.Model.Appointments.csproj">
+    <ProjectReference Include="..\CMD.Model.Appointments\CMD.Model.csproj">
       <Project>{5b18163f-3076-4ffa-83c1-2a3ecae01de4}</Project>
-      <Name>CMD.Model.Appointments</Name>
+      <Name>CMD.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

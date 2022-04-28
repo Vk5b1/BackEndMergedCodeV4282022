@@ -8,8 +8,8 @@
     <ProjectGuid>{5B18163F-3076-4FFA-83C1-2A3ECAE01DE4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CMD.Model.Appointments</RootNamespace>
-    <AssemblyName>CMD.Model.Appointments</AssemblyName>
+    <RootNamespace>CMD.Model</RootNamespace>
+    <AssemblyName>CMD.Model</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

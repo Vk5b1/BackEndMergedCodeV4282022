@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CMD.Model.Appointments
+namespace CMD.Model
 {
     public class Doctor
     {

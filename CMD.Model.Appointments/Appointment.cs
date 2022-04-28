@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CMD.Model.Appointments
+namespace CMD.Model
 {
     public class Appointment
     {
@@ -16,7 +16,7 @@ namespace CMD.Model.Appointments
         public int Id { get; set; }
         public string Comment { get; set; }
         public virtual FeedBack FeedBack { get; set; }
-        [Column(TypeName="Date")]
+        [Column(TypeName = "Date")]
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
         public AppointmentStatus Status { get; set; }

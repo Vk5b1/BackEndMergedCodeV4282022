@@ -1,4 +1,4 @@
-﻿namespace CMD.Model.Appointments
+﻿namespace CMD.Model
 {
     public enum Gender
     {

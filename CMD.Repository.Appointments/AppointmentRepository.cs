@@ -1,4 +1,4 @@
-﻿using CMD.Model.Appointments;
+﻿using CMD.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -39,6 +39,13 @@ namespace CMD.Repository.Appointments
             db.PatientDetails.Add(patientDetail);
             db.SaveChanges();
             return patientDetail;
+        }
+
+        public bool CheckDate(DateTime date, TimeSpan time, int doctorId)
+        {
+            var flag = db.Appointments.Where(a => a.Doctor.Id == doctorId).Any(a => a.AppointmentDate == date && a.AppointmentTime == time);
+
+            return flag;
         }
 
         public Doctor GetDoctor(int docId)
@@ -108,5 +115,34 @@ namespace CMD.Repository.Appointments
         {
             return db.Appointments.Find(appointmentId).Doctor.Id == doctorId;
         }
+
+        #region kcs kishore
+        public List<int> GetIdsAssociatedWithAppointment(int appointmentId)
+        {
+            return db.Appointments.Where(x => x.Id == appointmentId).Select(x => new List<int>
+            {
+                x.Id,
+                x.PatientDetail.Patient.Id,
+                x.Doctor.Id
+            }).FirstOrDefault();
+        }
+        #endregion
+
+        #region Praveen Code
+
+        public string GetComment(int appointmentId)
+        {
+            return db.Appointments.Where(a => a.Id == appointmentId).Select(a => a.Comment).FirstOrDefault();
+        }
+
+        public bool EditComment(int appointmentId, string comment)
+        {
+            var appointment = db.Appointments.Find(appointmentId);
+            appointment.Comment = comment;
+            db.Entry(appointment).State = EntityState.Modified;
+            return db.SaveChanges() > 0;
+        }
+
+        #endregion
     }
 }

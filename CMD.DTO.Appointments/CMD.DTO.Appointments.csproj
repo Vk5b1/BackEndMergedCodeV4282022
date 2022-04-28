@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
     <Compile Include="AppointmentFormDTO.cs" />
     <Compile Include="AppointmentStatusDTO.cs" />
     <Compile Include="DoctorDTO.cs" />
+    <Compile Include="IdsListViewDetailsDTO.cs" />
     <Compile Include="IssueDTO.cs" />
     <Compile Include="PaginationMetaData.cs" />
     <Compile Include="PaginationParams.cs" />

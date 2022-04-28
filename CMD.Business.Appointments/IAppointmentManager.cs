@@ -13,5 +13,8 @@ namespace CMD.Business.Appointments
         ICollection<PatientDTOForPatientSearch> GetPatients(int doctorId);
         ICollection<string> GetIssues();
         bool ChangeAppointmentStatus(AppointmentStatusDTO statusDTO, int doctorId);
+        IdsListViewDetailsDTO GetIdsAssociatedWithAppointment(int appointmentId);
+        AppointmentCommentDTO GetAppointmentComment(int appointmentId);
+        bool UpdateAppointmentComment(int appointmentId, AppointmentCommentDTO appointmentComment);
     }
 }

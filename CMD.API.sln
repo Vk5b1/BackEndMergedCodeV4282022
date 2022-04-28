@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMD.Repository.Appointments
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMD.DTO.Appointments", "CMD.DTO.Appointments\CMD.DTO.Appointments.csproj", "{1870AEA3-2504-4179-A7EF-796F7ABFE775}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMD.Model.Appointments", "CMD.Model.Appointments\CMD.Model.Appointments.csproj", "{5B18163F-3076-4FFA-83C1-2A3ECAE01DE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMD.Model", "CMD.Model.Appointments\CMD.Model.csproj", "{5B18163F-3076-4FFA-83C1-2A3ECAE01DE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
