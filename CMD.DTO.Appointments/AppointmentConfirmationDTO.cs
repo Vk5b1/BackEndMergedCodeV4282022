@@ -16,7 +16,6 @@ namespace CMD.DTO.Appointments
         public string IssueName { get; set; }
         public string DoctorName { get; set; }
         public string DoctorSpeciality { get; set; }
-        public DateTime DoctorDOB { get; set; }
         public string Reason { get; set; }
         public string Status { get; set; }
     }

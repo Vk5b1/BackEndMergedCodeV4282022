@@ -2,7 +2,7 @@
 {
     public class Vital
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public float ECG { get; set; }
         public float Temperature { get; set; }
         public float Diabetes { get; set; }

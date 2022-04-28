@@ -8,10 +8,8 @@ namespace CMD.DTO.Appointments
 {
     public class DoctorDTO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public DateTime DOB { get; set; }
-        public string DoctorPicture { get; set; }
-        public ICollection<string> Specialities { get; set; }
+        public int id { get; set; }
+        public string doctor_name { get; set; }
+        public string doctor_profile_image { get; set; }
     }
 }

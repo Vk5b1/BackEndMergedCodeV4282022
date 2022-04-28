@@ -1,4 +1,4 @@
-﻿namespace CMD.Model 
+﻿namespace CMD.Model
 {
     public class ContactDetail
     {

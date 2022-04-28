@@ -34,7 +34,7 @@ namespace CMD.API.Appointments.Tests
         {
             var appointment = new AppointmentFormDTO
             {
-                AppointmentDate = new DateTime(day: 25, month: 08, year: 2023),
+                AppointmentDate = new DateTime(day: 26, month: 10, year: 2023),
                 AppointmentTime = TimeSpan.Parse("11:00"),
                 Issue = "Leg Injury",
                 Reason = "Paitent met with accident",
@@ -59,7 +59,7 @@ namespace CMD.API.Appointments.Tests
                 PatientId = 1,
                 DoctorId = 2
             };
-            var result = manager.AddAppointment(appointment);
+            _ = manager.AddAppointment(appointment);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace CMD.API.Appointments.Tests
                 PatientId = 1,
                 DoctorId = 2
             };
-            var result = manager.AddAppointment(appointment);
+            _ = manager.AddAppointment(appointment);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace CMD.API.Appointments.Tests
                 PatientId = 1,
                 DoctorId = 2
             };
-            var result = manager.AddAppointment(appointment);
+            _ = manager.AddAppointment(appointment);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@ namespace CMD.API.Appointments.Tests
                 PatientId = null,
                 DoctorId = 2
             };
-            var result = manager.AddAppointment(appointment);
+            _ = manager.AddAppointment(appointment);
         }
 
         [TestMethod]

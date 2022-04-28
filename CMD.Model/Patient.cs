@@ -15,7 +15,7 @@ namespace CMD.Model
         public string Name { get; set; }
         public string PatientPicture { get; set; }
         public Gender Gender { get; set; }
-        [Column(TypeName ="Date")]
+        [Column(TypeName = "Date")]
         public DateTime DOB { get; set; }
         public BloodGroup BloodGroup { get; set; }
         public int Height { get; set; }

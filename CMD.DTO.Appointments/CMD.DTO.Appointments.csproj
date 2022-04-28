@@ -47,15 +47,23 @@
     <Compile Include="AppointmentConfirmationDTO.cs" />
     <Compile Include="AppointmentFormDTO.cs" />
     <Compile Include="AppointmentStatusDTO.cs" />
+    <Compile Include="ContactDetailDTO.cs" />
+    <Compile Include="DoctorAppointmentDTO.cs" />
+    <Compile Include="DoctorCardDTO.cs" />
     <Compile Include="DoctorDTO.cs" />
+    <Compile Include="DoctorInfoDTO.cs" />
+    <Compile Include="DoctorProfileDTO.cs" />
     <Compile Include="IdsListViewDetailsDTO.cs" />
     <Compile Include="IssueDTO.cs" />
     <Compile Include="PaginationMetaData.cs" />
     <Compile Include="PaginationParams.cs" />
+    <Compile Include="PatientCardDTO.cs" />
     <Compile Include="PatientDTO.cs" />
     <Compile Include="PatientDTOForPatientSearch.cs" />
     <Compile Include="PrescriptionDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestReportDTO.cs" />
+    <Compile Include="VitalDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

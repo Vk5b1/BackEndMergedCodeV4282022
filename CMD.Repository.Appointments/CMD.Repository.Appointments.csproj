@@ -60,14 +60,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CMD.Model.Appointments\CMD.Model.csproj">
-      <Project>{5b18163f-3076-4ffa-83c1-2a3ecae01de4}</Project>
-      <Name>CMD.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMD.DTO.Appointments\CMD.DTO.Appointments.csproj">
+      <Project>{1870AEA3-2504-4179-A7EF-796F7ABFE775}</Project>
+      <Name>CMD.DTO.Appointments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMD.Model\CMD.Model.csproj">
+      <Project>{9f9f537b-4583-4244-b53e-9f52cd39aa36}</Project>
+      <Name>CMD.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -114,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -148,6 +152,10 @@
     <ProjectReference Include="..\CMD.DTO.Appointments\CMD.DTO.Appointments.csproj">
       <Project>{1870AEA3-2504-4179-A7EF-796F7ABFE775}</Project>
       <Name>CMD.DTO.Appointments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMD.Model\CMD.Model.csproj">
+      <Project>{9f9f537b-4583-4244-b53e-9f52cd39aa36}</Project>
+      <Name>CMD.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\CMD.Repository.Appointments\CMD.Repository.Appointments.csproj">
       <Project>{B5BAFE28-0993-42FC-A9C3-B5272AA69FF7}</Project>

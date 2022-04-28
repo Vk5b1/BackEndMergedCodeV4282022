@@ -26,6 +26,11 @@ namespace CMD.Repository.Appointments
         public virtual DbSet<PatientDetail> PatientDetails { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<TestReport> TestReports { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<Prescription> Prescriptions { get; set; }
+        public virtual DbSet<Medicine> Medicines { get; set; }
+        public virtual DbSet<Vital> Vitals { get; set; }
     }
 
     //public class MyEntity

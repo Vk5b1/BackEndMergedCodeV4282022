@@ -53,8 +53,8 @@
       <Project>{1870aea3-2504-4179-a7ef-796f7abfe775}</Project>
       <Name>CMD.DTO.Appointments</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CMD.Model.Appointments\CMD.Model.csproj">
-      <Project>{5b18163f-3076-4ffa-83c1-2a3ecae01de4}</Project>
+    <ProjectReference Include="..\CMD.Model\CMD.Model.csproj">
+      <Project>{9f9f537b-4583-4244-b53e-9f52cd39aa36}</Project>
       <Name>CMD.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\CMD.Repository.Appointments\CMD.Repository.Appointments.csproj">
